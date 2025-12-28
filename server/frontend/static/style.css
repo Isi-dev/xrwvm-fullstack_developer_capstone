@@ -37,7 +37,8 @@ img{
   background-color: rgb(97, 64, 128);
   color: white;
   text-align: center;
-  margin:20px;
+  margin-top:20px;
+  margin-bottom:20px;
   padding:5px;
 }
 
