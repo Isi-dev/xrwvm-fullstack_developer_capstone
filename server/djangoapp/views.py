@@ -1,11 +1,9 @@
 import json
 import logging
-from datetime import datetime
 
-from django.shortcuts import get_object_or_404, render, redirect
-from django.http import JsonResponse
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.contrib.auth import logout, login, authenticate
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import CarMake, CarModel
@@ -18,8 +16,7 @@ logger = logging.getLogger(__name__)
 
 def get_cars(request):
     """Return all car models; populate DB if empty."""
-    count = CarMake.objects.count()
-    if count == 0:
+    if CarMake.objects.count() == 0:
         initiate()
 
     car_models = CarModel.objects.select_related("car_make")
@@ -44,6 +41,7 @@ def login_user(request):
             result["status"] = "Authenticated"
 
         return JsonResponse(result)
+
     except Exception as err:
         logger.error(f"Login error: {err}")
         return JsonResponse({"status": 400, "message": "Bad request"})
@@ -125,6 +123,7 @@ def add_review(request):
         data = json.loads(request.body)
         post_review(data)
         return JsonResponse({"status": 200})
+
     except Exception as err:
         logger.error(f"Add review error: {err}")
         return JsonResponse({"status": 401, "message": "Error in posting review"})
