@@ -20,7 +20,8 @@ def get_cars(request):
         initiate()
 
     car_models = CarModel.objects.select_related("car_make")
-    cars = [{"CarModel": cm.name, "CarMake": cm.car_make.name} for cm in car_models]
+    cars = [{"CarModel": cm.name,
+             "CarMake": cm.car_make.name} for cm in car_models]
 
     return JsonResponse({"CarModels": cars})
 
@@ -65,7 +66,8 @@ def registration(request):
         email = data["email"]
 
         if User.objects.filter(username=username).exists():
-            return JsonResponse({"userName": username, "error": "Already Registered"})
+            return JsonResponse({"userName": username,
+                                 "error": "Already Registered"})
 
         user = User.objects.create_user(
             username=username,
@@ -98,8 +100,10 @@ def get_dealer_reviews(request, dealer_id):
     reviews = get_request(endpoint)
 
     for review_detail in reviews:
-        sentiment_response = analyze_review_sentiments(review_detail["review"])
-        review_detail["sentiment"] = sentiment_response.get("sentiment", "neutral")
+        sentiment_response =
+            analyze_review_sentiments(review_detail["review"])
+        review_detail["sentiment"] =
+            sentiment_response.get("sentiment", "neutral")
 
     return JsonResponse({"status": 200, "reviews": reviews})
 
@@ -117,7 +121,8 @@ def get_dealer_details(request, dealer_id):
 def add_review(request):
     """Submit a review; only allowed for logged-in users."""
     if request.user.is_anonymous:
-        return JsonResponse({"status": 403, "message": "Unauthorized"})
+        return JsonResponse({"status": 403,
+                             "message": "Unauthorized"})
 
     try:
         data = json.loads(request.body)
