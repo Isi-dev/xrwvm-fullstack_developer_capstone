@@ -23,9 +23,9 @@ urlpatterns = [
 
     # Path to get dealers by state
     path(
-        "get_dealers/<str:state>", 
-         views.get_dealerships, 
-         name="get_dealers_by_state",
+        "get_dealers/<str:state>",
+        views.get_dealerships,
+        name="get_dealers_by_state",
     ),
 
     # Path for dealer reviews view
