@@ -11,7 +11,9 @@ SENTIMENT_ANALYZER_URL = os.getenv(
 
 
 def get_request(endpoint, **kwargs):
-    """Perform a GET request to the backend with optional query parameters."""
+    """
+    Perform a GET request to the backend with optional query parameters.
+    """
     params = ""
     if kwargs:
         for key, value in kwargs.items():
@@ -30,7 +32,9 @@ def get_request(endpoint, **kwargs):
 
 
 def analyze_review_sentiments(text):
-    """Analyze sentiment of a given text using the sentiment analyzer service."""
+    """
+    Analyze sentiment of a given text using the sentiment analyzer service.
+    """
     request_url = f"{SENTIMENT_ANALYZER_URL}analyze/{text}"
 
     try:
