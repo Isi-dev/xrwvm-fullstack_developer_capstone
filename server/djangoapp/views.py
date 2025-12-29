@@ -107,8 +107,6 @@ def get_dealer_reviews(request, dealer_id):
             "sentiment",
             "neutral",
         )
-
-
     return JsonResponse({"status": 200, "reviews": reviews})
 
 
@@ -135,5 +133,5 @@ def add_review(request):
 
     except Exception as err:
         logger.error(f"Add review error: {err}")
-        return JsonResponse({"status": 401, 
+        return JsonResponse({"status": 401,
                              "message": "Error in posting review"})
