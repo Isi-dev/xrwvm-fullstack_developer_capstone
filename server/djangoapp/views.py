@@ -100,10 +100,14 @@ def get_dealer_reviews(request, dealer_id):
     reviews = get_request(endpoint)
 
     for review_detail in reviews:
-        sentiment_response =
-            analyze_review_sentiments(review_detail["review"])
-        review_detail["sentiment"] =
-            sentiment_response.get("sentiment", "neutral")
+        sentiment_response = analyze_review_sentiments(
+            review_detail["review"]
+        )
+        review_detail["sentiment"] = sentiment_response.get(
+            "sentiment",
+            "neutral",
+        )
+
 
     return JsonResponse({"status": 200, "reviews": reviews})
 
@@ -131,4 +135,5 @@ def add_review(request):
 
     except Exception as err:
         logger.error(f"Add review error: {err}")
-        return JsonResponse({"status": 401, "message": "Error in posting review"})
+        return JsonResponse({"status": 401, 
+                             "message": "Error in posting review"})
